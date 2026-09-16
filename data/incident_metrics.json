@@ -1,0 +1,57 @@
+[
+  {
+    "timestamp": "2026-09-16T10:00:00Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "gpu_utilization": 96.0,
+    "gpu_memory_utilization": 94.0,
+    "queue_depth": 35,
+    "p95_latency_ms": 450.0,
+    "error_rate": 1.0,
+    "request_rate": 125.0
+  },
+  {
+    "timestamp": "2026-09-16T10:00:15Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "gpu_utilization": 96.0,
+    "gpu_memory_utilization": 94.0,
+    "queue_depth": 76,
+    "p95_latency_ms": 950.0,
+    "error_rate": 2.5,
+    "request_rate": 125.0
+  },
+  {
+    "timestamp": "2026-09-16T10:00:30Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "gpu_utilization": 96.0,
+    "gpu_memory_utilization": 95.0,
+    "queue_depth": 76,
+    "p95_latency_ms": 1850.0,
+    "error_rate": 5.2,
+    "request_rate": 120.0
+  },
+  {
+    "timestamp": "2026-09-16T10:00:45Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "gpu_utilization": 96.0,
+    "gpu_memory_utilization": 95.0,
+    "queue_depth": 76,
+    "p95_latency_ms": 1850.0,
+    "error_rate": 8.4,
+    "request_rate": 115.0
+  },
+  {
+    "timestamp": "2026-09-16T10:00:45Z",
+    "cluster": "cluster-b",
+    "service": "vllm-inference",
+    "gpu_utilization": 57.0,
+    "gpu_memory_utilization": 52.0,
+    "queue_depth": 18,
+    "p95_latency_ms": 410.0,
+    "error_rate": 0.7,
+    "request_rate": 98.0
+  }
+]

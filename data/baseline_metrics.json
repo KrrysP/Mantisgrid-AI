@@ -1,0 +1,24 @@
+[
+  {
+    "timestamp": "2026-09-16T09:55:00Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "gpu_utilization": 62.0,
+    "gpu_memory_utilization": 58.0,
+    "queue_depth": 20,
+    "p95_latency_ms": 420.0,
+    "error_rate": 0.8,
+    "request_rate": 100.0
+  },
+  {
+    "timestamp": "2026-09-16T09:55:00Z",
+    "cluster": "cluster-b",
+    "service": "vllm-inference",
+    "gpu_utilization": 54.0,
+    "gpu_memory_utilization": 50.0,
+    "queue_depth": 15,
+    "p95_latency_ms": 390.0,
+    "error_rate": 0.5,
+    "request_rate": 95.0
+  }
+]

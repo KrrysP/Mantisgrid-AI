@@ -1,0 +1,42 @@
+[
+  {
+    "timestamp": "2026-09-16T10:00:02Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "severity": "WARN",
+    "message": "GPU utilization exceeded 90% threshold (96.0% current)",
+    "trace_id": "tr-001"
+  },
+  {
+    "timestamp": "2026-09-16T10:00:16Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "severity": "WARN",
+    "message": "Request queue growth alarming: 76 requests queued",
+    "trace_id": "tr-002"
+  },
+  {
+    "timestamp": "2026-09-16T10:00:32Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "severity": "ERROR",
+    "message": "P95 inference latency severe degradation: 1850ms",
+    "trace_id": "tr-003"
+  },
+  {
+    "timestamp": "2026-09-16T10:00:46Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "severity": "CRITICAL",
+    "message": "Worker timeout: high error rate 8.4% due to CUDA execution queue stall",
+    "trace_id": "tr-004"
+  },
+  {
+    "timestamp": "2026-09-16T10:00:45Z",
+    "cluster": "cluster-b",
+    "service": "vllm-inference",
+    "severity": "INFO",
+    "message": "Inference worker operating within nominal parameters",
+    "trace_id": "tr-005"
+  }
+]

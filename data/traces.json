@@ -1,0 +1,47 @@
+[
+  {
+    "trace_id": "tr-001",
+    "timestamp": "2026-09-16T10:00:02Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "duration_ms": 460.0,
+    "status": "OK",
+    "parent_service": "api-gateway"
+  },
+  {
+    "trace_id": "tr-002",
+    "timestamp": "2026-09-16T10:00:16Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "duration_ms": 980.0,
+    "status": "OK",
+    "parent_service": "api-gateway"
+  },
+  {
+    "trace_id": "tr-003",
+    "timestamp": "2026-09-16T10:00:32Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "duration_ms": 1850.0,
+    "status": "TIMEOUT",
+    "parent_service": "api-gateway"
+  },
+  {
+    "trace_id": "tr-004",
+    "timestamp": "2026-09-16T10:00:46Z",
+    "cluster": "cluster-a",
+    "service": "vllm-inference",
+    "duration_ms": 2500.0,
+    "status": "ERROR",
+    "parent_service": "api-gateway"
+  },
+  {
+    "trace_id": "tr-005",
+    "timestamp": "2026-09-16T10:00:45Z",
+    "cluster": "cluster-b",
+    "service": "vllm-inference",
+    "duration_ms": 410.0,
+    "status": "OK",
+    "parent_service": "api-gateway"
+  }
+]
