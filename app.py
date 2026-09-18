@@ -82,11 +82,14 @@ cluster_b = lookup_cluster_health(cluster_health, "cluster-b")
 color_a = health_color(cluster_a.get("health_status"))
 color_b = health_color(cluster_b.get("health_status"))
 incident = result.severity in ("WARN", "ERROR", "CRITICAL")
+display_status = result.severity if incident else "HEALTHY"
+display_affected = result.affected_cluster if incident else "None"
+display_confidence = f"{result.confidence:.1f}%" if incident else "N/A"
 
 # -------------------------------------------------------------------
 # 1. Header & Controls
 # -------------------------------------------------------------------
-render_header(result.severity)
+render_header(display_status)
 
 st.divider()
 
@@ -113,7 +116,9 @@ with col_btn2:
 # -------------------------------------------------------------------
 # 2. Incident Banner
 # -------------------------------------------------------------------
-if result.severity in ("ERROR", "CRITICAL"):
+if not incident:
+    st.success("No active incidents detected. All clusters are operating within normal thresholds.")
+elif result.severity in ("ERROR", "CRITICAL"):
     st.error(f"🚨 **{result.incident_title}**")
 elif result.severity == "WARN":
     st.warning(f"⚠️ **{result.incident_title}**")
@@ -122,9 +127,9 @@ elif result.severity == "WARN":
 # 3. KPI row
 # -------------------------------------------------------------------
 k1, k2, k3 = st.columns(3)
-k1.metric("Affected Cluster", result.affected_cluster)
-k2.metric("Severity", result.severity)
-k3.metric("Confidence", f"{result.confidence:.1f}%")
+k1.metric("Affected Cluster", display_affected)
+k2.metric("Severity", display_status)
+k3.metric("Confidence", display_confidence)
 
 # -------------------------------------------------------------------
 # 4. Side-by-Side Status & Metric Cards
@@ -267,8 +272,7 @@ with r_col1:
         st.error(f"**Root Cause:** {result.root_cause}")
         st.metric(label="Confidence Score", value=f"{result.confidence:.1f}%")
     else:
-        st.success(f"**Root Cause:** {result.root_cause}")
-        st.metric(label="Confidence Score", value=f"{result.confidence:.1f}%")
+        st.success("**Root Cause:** No active incidents identified.")
 
 with r_col2:
     st.markdown("### 💡 Recommended Action")
@@ -315,4 +319,10 @@ st.divider()
 # 8. AI Executive Summary
 # -------------------------------------------------------------------
 st.subheader("🤖 AI Incident Report")
-st.markdown(f"> {result.explanation}")
+if incident:
+    st.markdown(f"> {result.explanation}")
+else:
+    st.markdown(
+        "> All clusters are operating within operational thresholds. "
+        "No resource bottlenecks or traffic routing anomalies observed."
+    )

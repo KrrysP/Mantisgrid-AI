@@ -64,9 +64,9 @@ def render_header(severity: str):
     with col2:
         st.write("##")
         level = (severity or "INFO").upper()
-        if level == "INFO":
+        if level in ("INFO", "HEALTHY"):
             st.success("System Status: HEALTHY")
-        elif level == "WARN":
+        elif level in ("WARN", "DEGRADED"):
             st.warning("System Status: DEGRADED")
         else:
             st.error(f"System Status: {level}")
