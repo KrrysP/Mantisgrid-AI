@@ -1,8 +1,60 @@
 import streamlit as st
 
 
-def render_header(status: str):
-    """Renders the dashboard top header with status badge."""
+def pretty_cluster(name: str) -> str:
+    """Formats cluster-a style identifiers as 'Cluster A'."""
+    if not name:
+        return "Unknown"
+    parts = str(name).replace("_", "-").split("-")
+    if len(parts) == 2 and parts[0].lower() == "cluster":
+        return f"Cluster {parts[1].upper()}"
+    return str(name)
+
+
+def format_pct(value: float) -> str:
+    return f"{value:.1f}%"
+
+
+def format_ms(value: float) -> str:
+    return f"{value:.1f} ms"
+
+
+def format_queue(value: float) -> str:
+    return f"{int(value)}"
+
+
+def health_color(health_status: str) -> str:
+    """Maps cluster health_status to metric card color keys."""
+    status = (health_status or "HEALTHY").upper()
+    if status == "CRITICAL":
+        return "red"
+    if status == "DEGRADED":
+        return "orange"
+    return "green"
+
+
+def lookup_cluster_health(cluster_health: list, cluster_id: str) -> dict:
+    """Returns a cluster health dict by cluster name, or empty defaults."""
+    for item in cluster_health or []:
+        if isinstance(item, dict):
+            name = item.get("cluster")
+            if name == cluster_id:
+                return item
+        elif getattr(item, "cluster", None) == cluster_id:
+            return item.model_dump() if hasattr(item, "model_dump") else dict(item)
+    return {
+        "cluster": cluster_id,
+        "gpu_utilization": 0.0,
+        "queue_depth": 0,
+        "p95_latency_ms": 0.0,
+        "error_rate": 0.0,
+        "root_cause_score": 0.0,
+        "health_status": "HEALTHY",
+    }
+
+
+def render_header(severity: str):
+    """Renders the dashboard top header with status badge from investigation severity."""
     col1, col2 = st.columns([3, 1])
 
     with col1:
@@ -11,10 +63,13 @@ def render_header(status: str):
 
     with col2:
         st.write("##")
-        if status == "Healthy":
+        level = (severity or "INFO").upper()
+        if level == "INFO":
             st.success("System Status: HEALTHY")
+        elif level == "WARN":
+            st.warning("System Status: DEGRADED")
         else:
-            st.error("System Status: CRITICAL")
+            st.error(f"System Status: {level}")
 
 
 def render_metric_card(
